@@ -1,0 +1,6 @@
+framework module Pods_studentklubben {
+  umbrella header "Pods-studentklubben-umbrella.h"
+
+  export *
+  module * { export * }
+}
