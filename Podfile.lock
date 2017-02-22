@@ -53,10 +53,11 @@ PODS:
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.0)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.0)
   - GTMSessionFetcher/Core (1.1.7)
-  - Kingfisher (3.2.1)
+  - HanekeSwift (0.10.1)
   - LatoFont (2.0.1)
+  - Nuke (4.1.2)
+  - Spring (1.0.3)
   - SPXRevealableView (0.2)
-  - SwiftDate (4.0.7)
   - SwiftyButton (0.6.0)
 
 DEPENDENCIES:
@@ -71,10 +72,11 @@ DEPENDENCIES:
   - Firebase/Database
   - Firebase/Storage
   - FontAwesome.swift
-  - Kingfisher (~> 3.0)
+  - HanekeSwift (from `git@github.com:Haneke/HanekeSwift.git`, branch `feature/swift-3`)
   - LatoFont
+  - Nuke
+  - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
   - SPXRevealableView
-  - SwiftDate (~> 4.0)
   - SwiftyButton
 
 EXTERNAL SOURCES:
@@ -86,6 +88,12 @@ EXTERNAL SOURCES:
   DateTools:
     :branch: swift
     :git: https://github.com/MatthewYork/DateTools
+  HanekeSwift:
+    :branch: feature/swift-3
+    :git: git@github.com:Haneke/HanekeSwift.git
+  Spring:
+    :branch: swift3
+    :git: https://github.com/MengTo/Spring.git
 
 CHECKOUT OPTIONS:
   BTNavigationDropdownMenu:
@@ -97,6 +105,12 @@ CHECKOUT OPTIONS:
   DateTools:
     :commit: c36311e6c0b28103f32311b54f1d27a334785bcc
     :git: https://github.com/MatthewYork/DateTools
+  HanekeSwift:
+    :commit: 1157a124ec699f4ad926cb054f1d0bfce88ae7a9
+    :git: git@github.com:Haneke/HanekeSwift.git
+  Spring:
+    :commit: 3a9227c6e9157e7b47f5ac1ee5abab2a56b50002
+    :git: https://github.com/MengTo/Spring.git
 
 SPEC CHECKSUMS:
   BTNavigationDropdownMenu: 093f3cbfad1572f2c222bdf8d17584d1e13380d4
@@ -117,12 +131,13 @@ SPEC CHECKSUMS:
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
   GoogleToolboxForMac: 2b2596cbb7186865e98cadf2b1e262d851c2b168
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
-  Kingfisher: 64ef28c6d3d6f344e3ae2d7f5c9da80439505d99
+  HanekeSwift: 4113367892828e7700d24a384027de6ebc79aad1
   LatoFont: 6ee909ba4326bfa3687d1b80ed743ddb91dabf50
+  Nuke: 7cfd2acdf90c36f66e6ea40795bac0d851a9afe0
+  Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
   SPXRevealableView: ae690be7e9fa43d074e37e23d5a6321e01651f4c
-  SwiftDate: 0efb04a6751b1ab804049b2b09a69848cd304c12
   SwiftyButton: 4c9b61c499f172971a1b8c2eebbbdc20a26d8a08
 
-PODFILE CHECKSUM: 4a63985837e4edf1fcda04002c54aaf68f37b98d
+PODFILE CHECKSUM: eeed800783684078e4346cf7bfc006c9dc4ef126
 
 COCOAPODS: 1.1.1

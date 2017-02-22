@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'CC91FC8838BC264CEC350328B31E1204'
+               BlueprintIdentifier = '8EF28167D1BADC51633D162135F4CE3D'
                BlueprintName = 'SPXRevealableView'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'SPXRevealableView.framework'>

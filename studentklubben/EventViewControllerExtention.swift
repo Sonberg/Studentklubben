@@ -23,14 +23,13 @@ extension EventViewController {
     // MARK : - Navigation Switch
     func navigationSwitch(_ color : UIColor, state : navigationState) -> DGRunkeeperSwitch {
         let runkeeperSwitch = DGRunkeeperSwitch(titles: ["Info","Chat"])
-        runkeeperSwitch.titleFont = UIFont.fontAwesome(ofSize: 14)
-        runkeeperSwitch.titles = [String.fontAwesomeIcon(name: .calendarO), String.fontAwesomeIcon(name: .commentsO)]
+        runkeeperSwitch.titleFont = UIFont.fontAwesome(ofSize: 15)
+        runkeeperSwitch.titles = [String.fontAwesomeIcon(name: .calendar), String.fontAwesomeIcon(name: .comments)]
         runkeeperSwitch.setSelectedIndex(state.rawValue, animated: false)
-        runkeeperSwitch.backgroundColor = color.darken(byPercentage: 0.1)
-        runkeeperSwitch.selectedBackgroundColor = .white
-        runkeeperSwitch.titleColor = .white
-        runkeeperSwitch.selectedTitleColor = color
-        //runkeeperSwitch.titleFont = UIFont(name: "HelveticaNeue-Medium", size: 13.0)
+        runkeeperSwitch.backgroundColor = color.withAlphaComponent(0.4)
+        runkeeperSwitch.selectedBackgroundColor = color
+        runkeeperSwitch.titleColor = UIColor(contrastingBlackOrWhiteColorOn: color, isFlat: true).withAlphaComponent(0.8)
+        runkeeperSwitch.selectedTitleColor = UIColor(contrastingBlackOrWhiteColorOn: color, isFlat: true)
         runkeeperSwitch.frame = CGRect(x: 30.0, y: 40.0, width: 120.0, height: 30.0)
         runkeeperSwitch.sizeToFit()
         runkeeperSwitch.addTarget(self, action: #selector(EventViewController.didChangeNavigationState(_:)), for: .valueChanged)
@@ -52,11 +51,27 @@ extension EventViewController {
         
         if let timeStampView = tableView.dequeueReusableRevealableViewWithIdentifier("timeStamp") as? TimestampView {
             timeStampView.date = NSDate.init()
+            timeStampView.color = color
             timeStampView.width = 55
             cell.setRevealableView(timeStampView, style: message.type == .other ? .over : .slide)
         }
         
         cell.messageLabel.text = message.text
+    }
+    
+    func setTableViewBackgroundGradient(topColor:UIColor, bottomColor:UIColor) {
+        
+        let gradientBackgroundColors = [topColor.cgColor, bottomColor.cgColor]
+        let gradientLocations = [0.1,1.0]
+        
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = gradientBackgroundColors
+        gradientLayer.locations = gradientLocations as [NSNumber]?
+        
+        gradientLayer.frame = self.headerView.frame
+        let backgroundView = UIView(frame: self.headerView.bounds)
+        backgroundView.layer.insertSublayer(gradientLayer, at: 0)
+        self.tableView.insertSubview(backgroundView, aboveSubview: self.headerView)
     }
 }
 
@@ -81,8 +96,19 @@ extension EventViewController
             self.searchView.frame.origin.y = self.screen.size.height - 50.0 + self.searchViewOffset
         }
         
-        if !isBeingDismissed {
-            //navigationBarSnapshot.frame = CGRect(x: 0, y: scrollView.contentOffset.y, width: view.bounds.width, height: -scrollView.contentOffset.y)
+        if self.switchView != nil {
+            if self.tableView.contentOffset.y > -16 {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.backButton.alpha = 0
+                    self.switchView.alpha = 0
+                })
+            } else {
+                UIView.animate(withDuration: 0.3, animations: {
+                    self.backButton.alpha = 1
+                    self.switchView.alpha = 1
+                    
+                })
+            }
         }
         
         UIView.animate(withDuration: 0.3, animations: { () -> Void in

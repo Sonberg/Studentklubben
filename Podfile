@@ -18,10 +18,11 @@ pod "DGRunkeeperSwitch", "~> 1.1.4"
 pod 'SwiftyButton'
 pod 'SPXRevealableView'
 pod "LatoFont"
-pod 'Kingfisher', '~> 3.0'
-pod 'SwiftDate', '~> 4.0'
+pod 'Nuke'
+pod 'HanekeSwift’, :git => ’git@github.com:Haneke/HanekeSwift.git’, :branch => ’feature/swift-3'
 pod 'DateTools', :git => 'https://github.com/MatthewYork/DateTools', :branch => 'swift'
 pod 'EZSwiftExtensions'
 pod 'BTNavigationDropdownMenu', :git => 'https://github.com/PhamBaTho/BTNavigationDropdownMenu.git', :branch => 'swift-3.0'
+pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
 end
 

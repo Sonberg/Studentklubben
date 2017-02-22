@@ -54,7 +54,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Kingfisher.xcscheme</key>
+		<key>HanekeSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -69,6 +69,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Nuke.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-studentklubben.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -79,7 +84,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SwiftDate.xcscheme</key>
+		<key>Spring.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -107,7 +112,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3D73C4ADC0B9F6C7B55E786E2A4AD73E</key>
+		<key>3CECE28B6D1002101C31D07F41CDC02B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>41F2F68BBF9F1FD70B04BAD663EAEF35</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4621C3F9BE4863F63014320D83FFE6F4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -127,7 +142,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>90ADD35C8450830D81E4E0DC33502951</key>
+		<key>8EF28167D1BADC51633D162135F4CE3D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,7 +157,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AFEEC4F821783AA679B133761699E0E0</key>
+		<key>AE4759774042D8E013517E82C6F7A058</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -152,22 +167,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C4944FEC314D1A66588651D006273ADE</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>C74D47B051BF84CA30E0723F127F42AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CC91FC8838BC264CEC350328B31E1204</key>
+		<key>E6201897E03F1CF81B18D371B6BEA2CB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E6201897E03F1CF81B18D371B6BEA2CB</key>
+		<key>E776C1A26EFDBBA9BB2E3F3B4068EF1A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

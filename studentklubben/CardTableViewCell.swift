@@ -7,26 +7,29 @@
 //
 
 import UIKit
-import Kingfisher
+import Nuke
+import Haneke
+import Spring
 import FontAwesome_swift
 import ChameleonFramework
 
 class CardTableViewCell: UITableViewCell {
 
     // MARK : - Outlet
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var descLabel: UILabel!
+    @IBOutlet weak var titleLabel: SpringLabel!
+    @IBOutlet weak var descLabel: SpringLabel!
     
     
     var backgroundImage : UIImageView?
     var color : UIColor = UIColor.flatWhite
     var event : Event = Event() {
         didSet {
-            self.backgroundColor = .flatBlack
+            self.backgroundColor = .clear
             self.titleLabel.textColor = .flatWhite
+            self.titleLabel.font = UIFont.init(name: "Futura-Bold", size: self.titleLabel.font.pointSize)
             self.descLabel.textColor = .flatWhite
             self.clipsToBounds = true
-            self.layer.cornerRadius = 6
+            self.layer.cornerRadius = 10
             
             titleLabel.text = event.name
             descLabel.text = event.location
@@ -39,21 +42,37 @@ class CardTableViewCell: UITableViewCell {
             }
             
             self.backgroundImage = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: self.contentView.frame.size.height))
+            self.backgroundImage?.contentMode = .scaleAspectFill
+            self.backgroundImage?.alpha = 0
             
             if event.url.characters.count > 0 {
-                let resource = ImageResource(downloadURL: URL(string: event.url)!, cacheKey: event.id)
-                self.backgroundImage?.kf.indicatorType = .activity
-                self.backgroundImage?.kf.setImage(with: resource)
+       
+                self.backgroundImage?.hnk_setImageFromURL(URL(string: event.url)!, placeholder: nil, format: nil, failure: { (err) in
+                    if err != nil {
+                        UIView.animate(withDuration: 0.3, animations: {
+                            self.backgroundColor = .flatBlack
+                            self.titleLabel.animate()
+                            self.descLabel.animate()
+                        })
+                    }
+                }, success: { (image : UIImage) in
+                    
+                    // MARK : - Add to View
+                    self.backgroundImage?.image = image
+                    self.event.image = image
+                    self.contentView.insertSubview(self.backgroundImage!, at: 0)
+                    
+                    UIView.animate(withDuration: 0.3, animations: {
+                        self.backgroundColor = UIColor.flatGray
+                        self.backgroundImage?.alpha = 0.8
+                        self.titleLabel.animate()
+                        self.descLabel.animate()
+                    })
+                    
+                })
             } else {
                 self.backgroundImage?.image = event.image
             }
-            
-            self.backgroundImage?.contentMode = .scaleAspectFill
-            self.backgroundImage?.alpha = 0.7
-            self.contentView.insertSubview(backgroundImage!, at: 0)
-            
-            let border = UIView(frame: CGRect(x: 0, y: self.contentView.frame.size.height - 8, width: width, height: 8))
-            border.backgroundColor = color
         }
     }
     

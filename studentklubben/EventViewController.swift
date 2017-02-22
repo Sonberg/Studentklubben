@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import LatoFont
 import DynamicButton
 import MapKit
+import Haneke
+import DateTools
 import SwiftyButton
-import LatoFont
 import ChameleonFramework
 import DGRunkeeperSwitch
 import FontAwesome_swift
@@ -32,6 +34,11 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
     @IBOutlet weak var tableView: UITableView!
     
     // MARK  : - Action
+    func close() {
+        self.navigationController?.popToRootViewController(animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     func didChangeNavigationState(_ sender : Any) {
         if self.currentState == .info {
             self.currentState = .chat
@@ -116,15 +123,20 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
     }
 
     // MARK : - Variable
+    var averageColor : UIColor = .white
+    var color : UIColor = .white
     let screen = UIScreen.main.bounds
     var navigationBarSnapshot: UIView!
     var navigationBarHeight: CGFloat = 0
-    let kTableViewHeaderHeight : CGFloat = 300.0
+    let kTableViewHeaderHeight : CGFloat = 500.0
     var headerView : UIView!
     var backButton : DynamicButton = DynamicButton(style: DynamicButtonStyle.caretLeft)
+    var switchView : DGRunkeeperSwitch!
     var goingButton : FlatButton = FlatButton()
     var goingLabel : InsetLabel = InsetLabel()
     var timer: Timer!
+    var bottomConstraint: NSLayoutConstraint?
+    let inputTextField: UITextField = UITextField()
     
     var event : Event = Event() {
         didSet {
@@ -142,14 +154,14 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
                     // MARK : - Delete cells
                     var indexPaths : [IndexPath] = []
                     for index in 0...6 {
-                        indexPaths.append(IndexPath(row: index, section: 1))
+                        indexPaths.append(IndexPath(row: index, section: 0))
                     }
                     self.tableView.deleteRows(at: indexPaths, with: UITableViewRowAnimation.fade)
                     
                     // MARK : - Add cells
                     indexPaths = []
                     for index in 0...self.event.messages.count - 1 {
-                        indexPaths.append(IndexPath(row: index, section: 1))
+                        indexPaths.append(IndexPath(row: index, section: 0))
                     }
                     
                     self.tableView.insertRows(at: indexPaths, with: UITableViewRowAnimation.fade)
@@ -160,14 +172,14 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
                     // MARK : - Delete cells
                     var indexPaths : [IndexPath] = []
                     for index in 0...self.event.messages.count - 1 {
-                        indexPaths.append(IndexPath(row: index, section: 1))
+                        indexPaths.append(IndexPath(row: index, section: 0))
                     }
                     self.tableView.deleteRows(at: indexPaths, with: UITableViewRowAnimation.fade)
                     
                     // MARK : - Add cells
                     indexPaths = []
                     for index in 0...6 {
-                        indexPaths.append(IndexPath(row: index, section: 1))
+                        indexPaths.append(IndexPath(row: index, section: 0))
                     }
                     
                     self.tableView.insertRows(at: indexPaths, with: UITableViewRowAnimation.fade)
@@ -179,13 +191,13 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
                 tableView.setContentOffset(lastScrollOffset, animated: false)
 
             }
-           // self.updateHeaderView()
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.navigationController?.setToolbarHidden(true, animated: true)
+        self.averageColor = UIColor(averageColorFrom: self.event.image).darken(byPercentage: 0.4)!
+        self.color = UIColor(contrastingBlackOrWhiteColorOn: self.averageColor, isFlat: false)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         tableView.dataSource = self
         tableView.delegate = self
@@ -195,9 +207,10 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
+        tableView.backgroundColor = averageColor
         setupHeaderView()
-        self.tableView.backgroundColor = .white
         self.navigationItem.title = self.event.name
+        self.setTableViewBackgroundGradient(topColor: .clear, bottomColor: self.averageColor)
         
         tableView.registerNib(UINib(nibName: "TimestampView", bundle: nil), forRevealableViewReuseIdentifier: "timeStamp")
         tableView.registerNib(UINib(nibName: "TimestampView", bundle: nil), forRevealableViewReuseIdentifier: "name")
@@ -205,6 +218,18 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
          navigationItem.setRightBarButton(UIBarButtonItem(customView: UIImageView.init(image: UIImage.fontAwesomeIcon(name: .userPlus, textColor: .darkGray, size: CGSize(width: 24, height: 24)))), animated: true)
         
         self.firebase()
+        
+        // MARK : - Back button
+        backButton = DynamicButton(style: DynamicButtonStyle.arrowLeft)
+        backButton.strokeColor = .white
+        backButton.frame = CGRect(x: 16, y: 32, width: 18, height: 18)
+        backButton.addTarget(self, action: #selector(close), for: .touchUpInside)
+        self.view.addSubview(backButton)
+        
+        // Switch
+        switchView = navigationSwitch(color, state: self.currentState)
+        switchView.frame = CGRect(x: (Int(screen.size.width)/2 - Int(switchView.bounds.size.width)/2), y: 28, width:  Int(switchView.bounds.size.width), height: Int(switchView.bounds.size.height))
+        self.view.addSubview(switchView)
         
     }
     
@@ -214,7 +239,6 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
     }
     
     override func viewDidAppear(_ animated: Bool) {
-
         self.timer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         
         tableView.reloadData()
@@ -247,10 +271,14 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
         self.updateHeaderView()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     // MARK : - Timer
     func updateTime()  {
         if self.currentState == .info {
-            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 1)], with: UITableViewRowAnimation.automatic)
+            self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: UITableViewRowAnimation.automatic)
         }
     }
     
@@ -262,7 +290,7 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
         for view in headerView.subviews {
             if view is UIImageView {
                 let imageView : UIImageView = view as! UIImageView
-                imageView.image = self.event.image
+                imageView.hnk_setImageFromURL(URL(string: event.url)!)
                 let color = UIColor(averageColorFrom: imageView.image!)
                 headerView.backgroundColor = color
                 view.backgroundColor = color
@@ -273,37 +301,24 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
         tableView.tableHeaderView = nil
         tableView.addSubview(headerView)
         
-        self.tableView.contentInset = UIEdgeInsets(top: kTableViewHeaderHeight - 44, left: 0, bottom: 0, right: 0)
+        self.tableView.contentInset = UIEdgeInsets(top: kTableViewHeaderHeight - 220, left: 0, bottom: 0, right: 0)
         self.tableView.contentOffset = CGPoint(x: 0.0, y: -kTableViewHeaderHeight)
         updateHeaderView()
     }
     
     func updateHeaderView() {
         
-        var headerRect = CGRect(x: 0, y: -kTableViewHeaderHeight + 44, width: tableView.bounds.size.width, height: kTableViewHeaderHeight)
+        var headerRect = CGRect(x: 0, y: -kTableViewHeaderHeight + 220, width: tableView.bounds.size.width, height: kTableViewHeaderHeight)
         tableView.frame.origin.y = 0
-        if tableView.contentOffset.y < -kTableViewHeaderHeight + 44 {
+        if tableView.contentOffset.y < -kTableViewHeaderHeight + 220 {
             headerRect.origin.y = tableView.contentOffset.y
-            headerRect.size.height = -tableView.contentOffset.y + 44
+            headerRect.size.height = -tableView.contentOffset.y + 220
         }
         
         headerView.frame = headerRect
         tableView.sendSubview(toBack: headerView)
  
         
-    }
-    
-    // MARK : - Screenshot
-    func detectScreenshot()  {
-        let mainQueue = OperationQueue.main
-        NotificationCenter.default.addObserver(forName: NSNotification.Name.UIApplicationUserDidTakeScreenshot, object: nil, queue: mainQueue,
-                                               using: { notification in
-                                                let message = Message()
-                                                message.type = .screenshot
-                                                message.user = "me"
-                                                message.save(eventId: self.event.id)
-                                                
-        })
     }
     
     
@@ -321,138 +336,40 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
             
             // MARK : - TableView bottom inset
             if searchViewOffset == 0.0 {
-                self.tableView.contentInset.bottom = 50
+                self.tableView.contentInset.bottom = 100
             } else if searchViewOffset < 0 {
-                self.tableView.contentInset.bottom  = searchViewOffset * -1 + 50
+                self.tableView.contentInset.bottom  = searchViewOffset * -1 + 100
             }
         }
     }
-    var bottomConstraint: NSLayoutConstraint?
-    let inputTextField: UITextField = UITextField()
-    
-    // MARK : - Chat field
     
     
-    func chatField() -> UIView {
-        self.inputTextField.delegate = self
-        self.inputTextField.setLeftPaddingPoints(6)
-        self.inputTextField.textColor = .white
-        self.inputTextField.attributedPlaceholder = NSAttributedString(string: "Skriv ett medelande...",
-                                                                  attributes: [NSForegroundColorAttributeName: UIColor.white])
-        self.inputTextField.font = UIFont.systemFont(ofSize: 14)
-
-        setNeedsStatusBarAppearanceUpdate()
-        
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
- 
-        
-        
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        self.view.addGestureRecognizer(tap)
-        
-        let sendButton = self.sendButton()
-        sendButton.addTarget(self, action: #selector(sendMessage), for: UIControlEvents.touchUpInside)
-
-        
-        let messageInputContainerView: UIView = UIView(frame: CGRect(x: 6, y: self.screen.height, width: UIScreen.main.bounds.width - 12, height: 44))
-        messageInputContainerView.backgroundColor = UIColor.darkGray
-        messageInputContainerView.layer.cornerRadius = 22
-        messageInputContainerView.addSubview(inputTextField)
-        messageInputContainerView.addSubview(sendButton)
-        messageInputContainerView.addConstraintsWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextField, sendButton)
-        messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: inputTextField)
-        messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: sendButton)
-        
-        detectScreenshot()
-        messageInputContainerView.alpha = 1
-        return messageInputContainerView
-    }
     
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-    
-    
-    func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            self.searchViewOffset = -keyboardSize.height
-            self.updateChatfield()
-        }
-    
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        self.searchViewOffset = 0.0
-        self.updateChatfield()
-    }
-
-    
-    func sendButton() -> UIButton {
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 22, height: 22))
-        button.setImage(UIImage.fontAwesomeIcon(name: FontAwesome.paperPlane, textColor: .white, size: CGSize(width: 22, height: 22)), for: .normal)
-        button.setImage(UIImage.fontAwesomeIcon(name: FontAwesome.paperPlaneO, textColor: .white, size: CGSize(width: 24, height: 24)), for: UIControlState.highlighted)
-        button.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
-        return button
-    }
-    
-    // MARK : - Keyboard
-    
-    func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
-    func sendMessage() -> Void {
-        if (self.inputTextField.text?.characters.count)! > 0 {
-            let message = Message()
-            message.user = "me"
-            message.text = self.inputTextField.text!
-            message.type = .me
-            message.save(eventId: self.event.id)
-            self.inputTextField.text = ""
-        }
-    }
-    
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.sendMessage()
-        return true
-    }
     
     
     // MARK : - Table View
     
      func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }
         
-        if section == 1 {
             if self.currentState == .info {
-                
                 return 7
             } else {
                 return self.event.messages.count
             }
-        }
         
         return 0
     }
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // MARK : - Switch navigation cell
-        if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "rounded", for: indexPath) as! RoundedTableViewCell
-            cell.backgroundColor = UIColor.white
-            cell.selectionStyle = .none
+
             
             // MARK : - Confirm
+            /*
             cell.textLabel?.text = ""
             self.goingButton = FlatButton(frame: CGRect(x: 12, y: 8, width: 160, height: 30))
             if self.userGoing(user: "me") {
@@ -478,107 +395,95 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
             }) {
                 cell.contentView.addSubview(self.goingButton)
             }
+             */
             
-            cell.corners = [.topLeft, .topRight]
-            cell.accessoryView = navigationSwitch(.darkGray, state: currentState)
-            
-            return cell
-        }
+           // cell.corners = [.topLeft, .topRight]
+           // cell.accessoryView = navigationSwitch(.darkGray, state: currentState)
+        
         
         if self.currentState == .info {
             
-            if indexPath.section == 1 && indexPath.row == 0 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "entrance", for: indexPath)
-                cell.backgroundColor = UIColor.white
-                if self.userGoing(user: "me") {
-                    cell.imageView?.image = UIImage.fontAwesomeIcon(name: .check, textColor: .flatGreen, size: CGSize(width: 22, height: 22))
-                } else {
-                    cell.imageView?.image = UIImage.fontAwesomeIcon(name: .circle, textColor: .lightGray, size: CGSize(width: 16, height: 16))
-                }
-                return cell
-            }
-            
-            // MARK : - VIP
-            if indexPath.section == 1 && indexPath.row == 4 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "row", for: indexPath)
-                cell.backgroundColor = .white
-                cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-                cell.textLabel?.textColor = .darkGray
-                cell.textLabel?.text = "VIP-Bord"
-                cell.detailTextLabel?.textColor = .clear
-                cell.detailTextLabel?.text = ""
+           
+            if indexPath.row == 0 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+                cell.backgroundColor = UIColor.clear
                 cell.selectionStyle = .none
-                cell.accessoryView = UIImageView(image: UIImage.fontAwesomeIcon(name: .chevronRight, textColor: .darkGray, size: CGSize(width: 18, height: 18)))
-                cell.layer.roundCorners(.allCorners, radius: 0)
+                cell.textLabel?.numberOfLines = 0
+                cell.textLabel?.text = self.event.name
+                cell.textLabel?.font = UIFont(name: "Futura-Bold", size: 26.0)
+                cell.textLabel?.textColor = color
+                cell.textLabel?.sizeToFit()
+                //cell.textLabel?.adjustsFontSizeToFitWidth = true
+                cell.layoutIfNeeded()
                 return cell
             }
-            
-            // MARK : - Description
-            if indexPath.section == 1 && indexPath.row == 5 {
+            if indexPath.row > 0 && indexPath.row < 3 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "row", for: indexPath)
-                cell.backgroundColor = .white
-                cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-                cell.textLabel?.textColor = .darkGray
-                cell.textLabel?.text = "Beskrivning"
+                cell.backgroundColor = .clear
+                cell.textLabel?.font = UIFont.lato(size: 16)
+                cell.textLabel?.textColor = color
                 cell.detailTextLabel?.textColor = .clear
-                cell.detailTextLabel?.text = ""
                 cell.selectionStyle = .none
                 cell.accessoryView = nil
                 cell.layer.roundCorners(.allCorners, radius: 0)
+                
+                // MARK : - Date
+                if indexPath.row == 1 {
+                    cell.imageView?.image = UIImage.init(icon: FontType.linearIcons(LinearIconType.clock), size: CGSize(width: 18, height: 18), textColor: color, backgroundColor: .clear)
+                    cell.textLabel?.text = self.event.date.timeAgoSinceNow()
+                }
+                
+                
+                // MARK : - Location
+                if indexPath.row == 2 {
+                    cell.imageView?.image = UIImage.init(icon: FontType.linearIcons(LinearIconType.mapMarker), size: CGSize(width: 18, height: 18), textColor: color, backgroundColor: .clear)
+                    cell.textLabel?.text = self.event.location
+                }
+                /*
+                // MARK : - Guest
+                if indexPath.row == 3 {
+                    cell.imageView?.image = UIImage.init(icon: FontType.linearIcons(LinearIconType.heart), size: CGSize(width: 18, height: 18), textColor: color, backgroundColor: .clear)
+                    cell.textLabel?.text = self.event.guest
+                }
+                
+                // MARK : - VIP
+                
+                if indexPath.row == 4 {
+                    cell.textLabel?.text = "VIP-Bord"
+                    cell.accessoryView = UIImageView(image: UIImage.init(icon: FontType.linearIcons(LinearIconType.chevronRight), size: CGSize(width: 18, height: 18), textColor: color, backgroundColor: .clear))
+                    cell.imageView?.image = UIImage.fontAwesomeIcon(name: .users, textColor: color, size: CGSize(width: 18, height: 18))
+                    cell.layer.roundCorners(.allCorners, radius: 0)
+                    return cell
+                }
+    */
                 return cell
             }
             
-            if indexPath.section == 1 && indexPath.row == 6 {
+            if indexPath.row == 3 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "visitors", for: indexPath) as! VisitorsTableViewCell
+                cell.imageView?.image = UIImage.init(icon: FontType.linearIcons(LinearIconType.checkmarkCircle), size: CGSize(width: 18, height: 18), textColor: color, backgroundColor: .clear)
+                cell.update()
+                cell.backgroundColor = .clear
+                return cell
+            }
+            
+            
+            
+            if indexPath.row == 4 {
                 let descCell = tableView.dequeueReusableCell(withIdentifier: "desc", for: indexPath) as! DescTableViewCell
                 descCell.detailTextLabel?.numberOfLines = 0
+                descCell.backgroundColor = .clear
                 descCell.descLabel.textAlignment = .left
                 descCell.descLabel.numberOfLines = 0
-                descCell.descLabel.textColor = .darkGray
+                descCell.descLabel.textColor = color
                 descCell.descLabel.topInset = 0
-                descCell.descLabel.font = UIFont.systemFont(ofSize: 14)
-                descCell.descLabel.text = "You asked, Font Awesome delivers with 41 shiny new icons in version 4.7. Want to request new icons? Here's how. Need vectors or want to use on the desktop? Check the cheatsheet."
+                descCell.descLabel.font = UIFont.latoLight(size: 14)
+                descCell.descLabel.text = ""//self.event.desc
                 
                 descCell.detailTextLabel?.sizeToFit()
                 return descCell
             }
             
-            
-            if indexPath.section == 1 {
-                let cell = tableView.dequeueReusableCell(withIdentifier: "row", for: indexPath)
-                cell.backgroundColor = .white
-                cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-                cell.textLabel?.textColor = .darkGray
-                cell.detailTextLabel?.textColor = .darkGray
-                cell.detailTextLabel?.font = UIFont.systemFont(ofSize: 14.0)
-                cell.selectionStyle = .none
-                cell.accessoryView = nil
-                cell.layer.roundCorners(.allCorners, radius: 0)
-                
-                
-                // MARK : - Date
-                if indexPath.row == 1 {
-                    //cell.imageView?.image = UIImage.fontAwesomeIcon(name: .clockO, textColor: .darkGray, size: CGSize(width: 24, height: 24))
-                    cell.textLabel?.text = "Tid"
-                    cell.detailTextLabel?.text = self.event.date.timeAgoSinceNow()
-                }
-                
-                // MARK : - Location
-                if indexPath.row == 2 {
-                    //cell.imageView?.image = UIImage.fontAwesomeIcon(name: .mapPin, textColor: .darkGray, size: CGSize(width: 24, height: 24))
-                    cell.textLabel?.text = "Plats"
-                    cell.detailTextLabel?.text = self.event.location
-                }
-                
-                // MARK : - Guest
-                if indexPath.row == 3 {
-                    //cell.imageView?.image = UIImage.fontAwesomeIcon(name: .heart, textColor: .darkGray, size: CGSize(width: 24, height: 24))
-                    cell.textLabel?.text = "Artist"
-                    cell.detailTextLabel?.text = self.event.guest
-                }
-                
-                return cell
-                
-            }
             
             
         } else {
@@ -595,7 +500,8 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
             
             if self.event.messages[indexPath.row].type == .screenshot {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "screenshot", for: indexPath) as! ScreenshotTableViewCell
-                cell.update(message: event.messages[indexPath.row])
+                cell.update(message: event.messages[indexPath.row], color: color)
+                cell.backgroundColor = .clear
                 return cell
             }
             
@@ -612,32 +518,30 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
             
         }
         
-        
-        
-        // MARK : - Last row
-        if indexPath.section == 2 && indexPath.row == 0 {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "rounded", for: indexPath) as! RoundedTableViewCell
-            cell.backgroundColor = .clear
-            cell.textLabel?.text = ""
-            cell.selectionStyle = .none
-            cell.accessoryView = nil
-            cell.corners = [UIRectCorner.bottomLeft, UIRectCorner.bottomRight]
-            return cell
-            
-        }
-        
-        return tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.backgroundColor = .clear
+        cell.textLabel?.text = ""
+        return cell
     }
     
     // MARK : - Height
      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if indexPath.row == 5 && indexPath.section == 1 && self.currentState == .info {
-            // return 300
+        if self.currentState == .info {
+            if indexPath.row == 0 {
+                return 32
+            }
+            
+            if indexPath.row > 0 && indexPath.row < 3 {
+                return 34
+            }
+            
+            if indexPath.row == 3 {
+                return 120
+            }
         }
+    
         
-        if indexPath.section == 1 && self.currentState == .chat  {
+        if indexPath.section == 0 && self.currentState == .chat  {
             
             let message = self.event.messages[indexPath.row]
             

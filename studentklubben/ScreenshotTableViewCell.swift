@@ -12,7 +12,9 @@ class ScreenshotTableViewCell: UITableViewCell {
 
     @IBOutlet weak var screenshotLabel: UILabel!
     
-    func update(message : Message) {
+    func update(message : Message, color : UIColor) {
+        self.screenshotLabel.textColor = color
+        
         if message.user != "me" {
             self.screenshotLabel.text = message.user + " tog en skärmdump"
         }

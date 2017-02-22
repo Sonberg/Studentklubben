@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DateTools
 import SwiftyButton
 import Firebase
 
@@ -28,7 +27,7 @@ extension EventViewController {
                 self.event.messages.insert(new, at: 0)
                 if self.currentState == .chat {
                     self.tableView.beginUpdates()
-                    self.tableView.insertRows(at: [IndexPath(row: 0, section: 1)], with: UITableViewRowAnimation.top)
+                    self.tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: UITableViewRowAnimation.top)
                     self.tableView.endUpdates()
                 }
             }

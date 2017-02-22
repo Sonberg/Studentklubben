@@ -6,10 +6,9 @@
 //  Copyright © 2017 Per Sonberg. All rights reserved.
 //
 
+import Nuke
 import UIKit
 import Firebase
-import DateTools
-import Kingfisher
 
 class Event: UIModel {
     override init() {
@@ -55,12 +54,6 @@ class Event: UIModel {
         
         if data["url"] != nil  {
             self.url = data["url"] as! String
-            
-            ImageDownloader.default.downloadImage(with: URL(string: self.url)!, options: [], progressBlock: nil, completionHandler: { (image, error, url, data) in
-                if image != nil {
-                    self.image = image!
-                }
-            })
         }
         
     }

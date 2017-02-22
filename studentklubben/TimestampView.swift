@@ -17,6 +17,13 @@ class TimestampView: RevealableView {
       titleLabel.text = dateFormatter.string(from: self.date as Date)
     }
   }
+    
+    var color : UIColor = .white {
+        didSet {
+            titleLabel.textColor = color
+        }
+    }
+    
   
   private var dateFormatter: DateFormatter = {
     let formatter = DateFormatter()

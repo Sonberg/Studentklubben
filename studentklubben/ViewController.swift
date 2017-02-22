@@ -17,6 +17,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // MARK : - Outlets
     @IBOutlet weak var tableView: UITableView!
     
+    // MARK : - Actions
+    func didTouchUser(_ sender : Any) {
+        self.performSegue(withIdentifier: "userSegue", sender: self)
+    }
+    
     // MARK : - Varables
     let transtition = SwiftyExpandingTransition()
     var selectedCellFrame : CGRect = .zero
@@ -26,26 +31,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         self.firebase()
-      
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.white
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
         view.backgroundColor = UIColor.white
-    navigationItem.setRightBarButton(UIBarButtonItem(customView: UIImageView.init(image: UIImage.fontAwesomeIcon(name: .user, textColor: .darkGray, size: CGSize(width: 24, height: 24)))), animated: true)
+        let userButton = UIButton(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        userButton.setImage(UIImage.init(icon: FontType.linearIcons(LinearIconType.user), size: CGSize(width: 24, height: 24), textColor: .darkGray, backgroundColor: .clear), for: .normal)
+        userButton.addTarget(self, action: #selector(didTouchUser(_:)), for: .touchUpInside)
+        navigationItem.setRightBarButton(UIBarButtonItem(customView: userButton), animated: true)
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationItem.title = "Studentklubben"
-        /*
-        let image = UIImageView(frame: CGRect(x: 0, y: 0, width: 60, height: 30))
-        image.image = #imageLiteral(resourceName: "16735184_10158187037655103_1064699215_o")
-        image.contentMode = .scaleAspectFit
-        navigationItem.titleView = image
- */
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     

@@ -18,6 +18,7 @@
 		8926FC631E3E19120095BE2B /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8926FC621E3E19120095BE2B /* EventViewController.swift */; };
 		89338DAE1E5A046700D2A873 /* UserView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 89338DAD1E5A046700D2A873 /* UserView.xib */; };
 		89338DB01E5A047A00D2A873 /* UserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89338DAF1E5A047A00D2A873 /* UserView.swift */; };
+		89361F0C1E5C2B6D00FBF5F3 /* VisitorsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89361F0B1E5C2B6C00FBF5F3 /* VisitorsTableViewCell.swift */; };
 		894AD2041E4A1EC1003BF339 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894AD2031E4A1EC1003BF339 /* MessageTableViewCell.swift */; };
 		894AD2071E4A1F6F003BF339 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894AD2061E4A1F6F003BF339 /* Message.swift */; };
 		895D59CA1E48D5030062190D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D59C91E48D5030062190D /* Global.swift */; };
@@ -28,6 +29,18 @@
 		896D74F81E3F9BA20021BBA8 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D74F71E3F9BA20021BBA8 /* Event.swift */; };
 		896D74FA1E3FDF5D0021BBA8 /* SwiftyExpandingTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D74F91E3FDF5D0021BBA8 /* SwiftyExpandingTransition.swift */; };
 		89B66DD51E52FA97006830E2 /* EventTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B66DD41E52FA97006830E2 /* EventTableView.swift */; };
+		89B887B21E5C8E55009DEEA3 /* Dripicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89B887A71E5C8E55009DEEA3 /* Dripicons.ttf */; };
+		89B887B31E5C8E55009DEEA3 /* Emoji.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89B887A81E5C8E55009DEEA3 /* Emoji.ttf */; };
+		89B887B41E5C8E55009DEEA3 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89B887A91E5C8E55009DEEA3 /* FontAwesome.ttf */; };
+		89B887B51E5C8E55009DEEA3 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89B887AA1E5C8E55009DEEA3 /* Ionicons.ttf */; };
+		89B887B61E5C8E55009DEEA3 /* Linearicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89B887AB1E5C8E55009DEEA3 /* Linearicons.ttf */; };
+		89B887B71E5C8E55009DEEA3 /* MapIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89B887AC1E5C8E55009DEEA3 /* MapIcons.ttf */; };
+		89B887B81E5C8E55009DEEA3 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89B887AD1E5C8E55009DEEA3 /* MaterialIcons.ttf */; };
+		89B887B91E5C8E55009DEEA3 /* OpenIconic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89B887AE1E5C8E55009DEEA3 /* OpenIconic.ttf */; };
+		89B887BA1E5C8E55009DEEA3 /* Stateface.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89B887AF1E5C8E55009DEEA3 /* Stateface.ttf */; };
+		89B887BB1E5C8E55009DEEA3 /* SwiftIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B887B01E5C8E55009DEEA3 /* SwiftIcons.swift */; };
+		89B887BC1E5C8E55009DEEA3 /* WeatherIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 89B887B11E5C8E55009DEEA3 /* WeatherIcons.ttf */; };
+		89B887BE1E5C99A1009DEEA3 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89B887BD1E5C99A1009DEEA3 /* UserViewController.swift */; };
 		89BB18981E58831E006185F7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89BB18971E58831E006185F7 /* GoogleService-Info.plist */; };
 		89BB189A1E588587006185F7 /* EventChatExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BB18991E588587006185F7 /* EventChatExtension.swift */; };
 		89BB189C1E5894A8006185F7 /* TimeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89BB189B1E5894A8006185F7 /* TimeAgo.swift */; };
@@ -56,6 +69,7 @@
 		8926FC621E3E19120095BE2B /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		89338DAD1E5A046700D2A873 /* UserView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserView.xib; sourceTree = "<group>"; };
 		89338DAF1E5A047A00D2A873 /* UserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserView.swift; sourceTree = "<group>"; };
+		89361F0B1E5C2B6C00FBF5F3 /* VisitorsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorsTableViewCell.swift; sourceTree = "<group>"; };
 		894AD2031E4A1EC1003BF339 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		894AD2061E4A1F6F003BF339 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		895D59C91E48D5030062190D /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
@@ -66,6 +80,18 @@
 		896D74F71E3F9BA20021BBA8 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		896D74F91E3FDF5D0021BBA8 /* SwiftyExpandingTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyExpandingTransition.swift; sourceTree = "<group>"; };
 		89B66DD41E52FA97006830E2 /* EventTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableView.swift; sourceTree = "<group>"; };
+		89B887A71E5C8E55009DEEA3 /* Dripicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Dripicons.ttf; sourceTree = "<group>"; };
+		89B887A81E5C8E55009DEEA3 /* Emoji.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Emoji.ttf; sourceTree = "<group>"; };
+		89B887A91E5C8E55009DEEA3 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		89B887AA1E5C8E55009DEEA3 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Ionicons.ttf; sourceTree = "<group>"; };
+		89B887AB1E5C8E55009DEEA3 /* Linearicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Linearicons.ttf; sourceTree = "<group>"; };
+		89B887AC1E5C8E55009DEEA3 /* MapIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MapIcons.ttf; sourceTree = "<group>"; };
+		89B887AD1E5C8E55009DEEA3 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = MaterialIcons.ttf; sourceTree = "<group>"; };
+		89B887AE1E5C8E55009DEEA3 /* OpenIconic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = OpenIconic.ttf; sourceTree = "<group>"; };
+		89B887AF1E5C8E55009DEEA3 /* Stateface.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Stateface.ttf; sourceTree = "<group>"; };
+		89B887B01E5C8E55009DEEA3 /* SwiftIcons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftIcons.swift; sourceTree = "<group>"; };
+		89B887B11E5C8E55009DEEA3 /* WeatherIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = WeatherIcons.ttf; sourceTree = "<group>"; };
+		89B887BD1E5C99A1009DEEA3 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		89BB18971E58831E006185F7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		89BB18991E588587006185F7 /* EventChatExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventChatExtension.swift; sourceTree = "<group>"; };
 		89BB189B1E5894A8006185F7 /* TimeAgo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeAgo.swift; sourceTree = "<group>"; };
@@ -116,6 +142,7 @@
 		8926FC441E3E161E0095BE2B /* studentklubben */ = {
 			isa = PBXGroup;
 			children = (
+				89B887A61E5C8E46009DEEA3 /* Icons */,
 				89F110FC1E59E794005ADD97 /* studentklubben.entitlements */,
 				89CE87321E52F7B3004658CB /* RevealView */,
 				8926FC451E3E161E0095BE2B /* AppDelegate.swift */,
@@ -129,6 +156,7 @@
 				89758A9D1E4B992600897BF9 /* Cells */,
 				8926FC5C1E3E165A0095BE2B /* ViewController.swift */,
 				8926FC5D1E3E165A0095BE2B /* Main.storyboard */,
+				89B887BD1E5C99A1009DEEA3 /* UserViewController.swift */,
 				8926FC621E3E19120095BE2B /* EventViewController.swift */,
 				89B66DD41E52FA97006830E2 /* EventTableView.swift */,
 				89BB18991E588587006185F7 /* EventChatExtension.swift */,
@@ -177,8 +205,27 @@
 				895D59CB1E4903850062190D /* RoundedTableViewCell.swift */,
 				89F8A45A1E5087230066F2AF /* DescTableViewCell.swift */,
 				89BB189D1E59AA8A006185F7 /* ScreenshotTableViewCell.swift */,
+				89361F0B1E5C2B6C00FBF5F3 /* VisitorsTableViewCell.swift */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		89B887A61E5C8E46009DEEA3 /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				89B887A71E5C8E55009DEEA3 /* Dripicons.ttf */,
+				89B887A81E5C8E55009DEEA3 /* Emoji.ttf */,
+				89B887A91E5C8E55009DEEA3 /* FontAwesome.ttf */,
+				89B887AA1E5C8E55009DEEA3 /* Ionicons.ttf */,
+				89B887AB1E5C8E55009DEEA3 /* Linearicons.ttf */,
+				89B887AC1E5C8E55009DEEA3 /* MapIcons.ttf */,
+				89B887AD1E5C8E55009DEEA3 /* MaterialIcons.ttf */,
+				89B887AE1E5C8E55009DEEA3 /* OpenIconic.ttf */,
+				89B887AF1E5C8E55009DEEA3 /* Stateface.ttf */,
+				89B887B01E5C8E55009DEEA3 /* SwiftIcons.swift */,
+				89B887B11E5C8E55009DEEA3 /* WeatherIcons.ttf */,
+			);
+			name = Icons;
 			sourceTree = "<group>";
 		};
 		89CE87321E52F7B3004658CB /* RevealView */ = {
@@ -280,9 +327,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				89B887B61E5C8E55009DEEA3 /* Linearicons.ttf in Resources */,
+				89B887B51E5C8E55009DEEA3 /* Ionicons.ttf in Resources */,
 				89BB18981E58831E006185F7 /* GoogleService-Info.plist in Resources */,
+				89B887B31E5C8E55009DEEA3 /* Emoji.ttf in Resources */,
+				89B887BA1E5C8E55009DEEA3 /* Stateface.ttf in Resources */,
+				89B887B81E5C8E55009DEEA3 /* MaterialIcons.ttf in Resources */,
+				89B887B91E5C8E55009DEEA3 /* OpenIconic.ttf in Resources */,
 				8926FC611E3E165A0095BE2B /* Main.storyboard in Resources */,
+				89B887BC1E5C8E55009DEEA3 /* WeatherIcons.ttf in Resources */,
+				89B887B21E5C8E55009DEEA3 /* Dripicons.ttf in Resources */,
+				89B887B71E5C8E55009DEEA3 /* MapIcons.ttf in Resources */,
 				89338DAE1E5A046700D2A873 /* UserView.xib in Resources */,
+				89B887B41E5C8E55009DEEA3 /* FontAwesome.ttf in Resources */,
 				89CE872D1E52E504004658CB /* TimestampView.xib in Resources */,
 				8926FC531E3E161E0095BE2B /* LaunchScreen.storyboard in Resources */,
 				8926FC501E3E161E0095BE2B /* Assets.xcassets in Resources */,
@@ -358,15 +415,18 @@
 				8926FC461E3E161E0095BE2B /* AppDelegate.swift in Sources */,
 				89BB189E1E59AA8A006185F7 /* ScreenshotTableViewCell.swift in Sources */,
 				894AD2041E4A1EC1003BF339 /* MessageTableViewCell.swift in Sources */,
+				89361F0C1E5C2B6D00FBF5F3 /* VisitorsTableViewCell.swift in Sources */,
 				89CE87291E52E3DE004658CB /* RevealableTableViewCell.swift in Sources */,
 				89BB189C1E5894A8006185F7 /* TimeAgo.swift in Sources */,
 				8926FC4E1E3E161E0095BE2B /* studentklubben.xcdatamodeld in Sources */,
 				895D59CA1E48D5030062190D /* Global.swift in Sources */,
+				89B887BE1E5C99A1009DEEA3 /* UserViewController.swift in Sources */,
 				8926FC5E1E3E165A0095BE2B /* ExpandingCellTransition.swift in Sources */,
 				89B66DD51E52FA97006830E2 /* EventTableView.swift in Sources */,
 				8926FC5F1E3E165A0095BE2B /* CardTableViewCell.swift in Sources */,
 				89CE872A1E52E3DE004658CB /* RevealableView.swift in Sources */,
 				894AD2071E4A1F6F003BF339 /* Message.swift in Sources */,
+				89B887BB1E5C8E55009DEEA3 /* SwiftIcons.swift in Sources */,
 				89338DB01E5A047A00D2A873 /* UserView.swift in Sources */,
 				895D59CC1E4903860062190D /* RoundedTableViewCell.swift in Sources */,
 				8926FC631E3E19120095BE2B /* EventViewController.swift in Sources */,
