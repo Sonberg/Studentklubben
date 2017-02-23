@@ -27,27 +27,48 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var selectedCellFrame : CGRect = .zero
     var events : [Event] = []
     let screen = UIScreen.main.bounds
+    var user : User = User() {
+        didSet {
+            print(user)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController!.interactivePopGestureRecognizer?.delegate = self
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         self.firebase()
+    
         
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.white
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: -10)
+        tableView.contentInset = UIEdgeInsets(top: 64, left: 10, bottom: 0, right: -10)
         view.backgroundColor = UIColor.white
-        let userButton = UIButton(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        
+        // MARK : - User profile
+        let userButton = UIButton(frame: CGRect(x: Int(self.screen.size.width) - 32 - 16, y: 28, width: 32, height: 32))
         userButton.setImage(UIImage.init(icon: FontType.linearIcons(LinearIconType.user), size: CGSize(width: 24, height: 24), textColor: .darkGray, backgroundColor: .clear), for: .normal)
         userButton.addTarget(self, action: #selector(didTouchUser(_:)), for: .touchUpInside)
-        navigationItem.setRightBarButton(UIBarButtonItem(customView: userButton), animated: true)
+        self.view.addSubview(userButton)
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationItem.title = "Studentklubben"
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        tableView.reloadData()
+        
+        // MARK : - Logout
+        let firebaseAuth = FIRAuth.auth()
+        
+        do {
+            try firebaseAuth?.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
+    
     }
     
     
@@ -80,16 +101,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // MARK : - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        self.navigationController?.delegate = self
         self.navigationItem.title = ""
         
-        if let indexPath =  self.tableView.indexPathForSelectedRow {
-            let vc = segue.destination as! EventViewController
-            vc.event = self.events[indexPath.row]
+        if segue.destination is EventViewController {
+            //self.navigationController?.delegate = self
             
-            self.tableView.deselectRow(at: indexPath, animated: true)
+            if let indexPath =  self.tableView.indexPathForSelectedRow {
+                let vc = segue.destination as! EventViewController
+                vc.event = self.events[indexPath.row]
+                
+                self.tableView.deselectRow(at: indexPath, animated: true)
+            }
         }
-        
         
     }
     

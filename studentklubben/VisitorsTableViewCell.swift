@@ -9,19 +9,22 @@
 import UIKit
 import ChameleonFramework
 
+protocol visitorDelegate {
+    func didSelect(user : User)
+}
+
 class VisitorsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var scrollView: UIScrollView!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    var delegate : visitorDelegate?
+    
+    func didSelectGrid(_ sender: UITapGestureRecognizer) {
+        if let id = sender.accessibilityHint {
+            print(id)
+        }
+        
+        delegate?.didSelect(user: User())
     }
     
     func update() {
@@ -30,7 +33,7 @@ class VisitorsTableViewCell: UITableViewCell {
         self.backgroundColor = .clear
         
         // MARK : - Total Visitors
-        let view = UIView(frame: CGRect(x: 0, y: 16, width: 82, height: Int(self.bounds.size.height) - 60))
+        let view = UIView(frame: CGRect(x: 0, y: 16, width: 82, height: Int(self.bounds.size.height) - 40))
         view.backgroundColor = .white
         view.clipsToBounds = true
         view.alpha = 0.6
@@ -53,13 +56,18 @@ class VisitorsTableViewCell: UITableViewCell {
     
     func visitorView(name: String, index : Int) -> UIImageView {
         let image = #imageLiteral(resourceName: "43539")
-        let view = UIImageView(frame: CGRect(x: ((index + 1)  * 90), y: 16, width: 82, height: Int(self.bounds.size.height) - 60))
+        let view = UIImageView(frame: CGRect(x: ((index + 1)  * 90), y: 16, width: 82, height: Int(self.bounds.size.height) - 40))
         view.backgroundColor = UIColor(averageColorFrom: image)
         view.clipsToBounds = true
         //view.layer.cornerRadius = 10
         view.alpha = 0.6
         view.contentMode = .scaleAspectFill
         view.image = image
+        view.isUserInteractionEnabled = true
+        
+        let tap = UITapGestureRecognizer(target: self, action: "didSelectGrid:")
+        tap.accessibilityHint = name
+        view.addGestureRecognizer(tap)
         
         return view
     }

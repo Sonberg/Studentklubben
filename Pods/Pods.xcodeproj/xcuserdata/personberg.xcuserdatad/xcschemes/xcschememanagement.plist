@@ -4,7 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AnimatedSegmentSwitch.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>BTNavigationDropdownMenu.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -30,6 +40,21 @@
 			<false/>
 		</dict>
 		<key>EZSwiftExtensions.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKCoreKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKLoginKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKShareKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -65,6 +90,11 @@
 			<false/>
 		</dict>
 		<key>LatoFont.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Navigation-stack.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -112,12 +142,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3CECE28B6D1002101C31D07F41CDC02B</key>
+		<key>39AAC424D927C2DA5B53EB7E460E13FA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>41F2F68BBF9F1FD70B04BAD663EAEF35</key>
+		<key>40CBA0059155461B112BD657CDDB9D2D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>44CAD6CE523055ED339E87154473A254</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -142,7 +177,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8EF28167D1BADC51633D162135F4CE3D</key>
+		<key>8C0E9D4F7BA4803DFC021420612C624A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>99FF32E26175533A0846EBEDA14CF91A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -162,6 +202,16 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>BC5000D645EEAF961C85907CDC796FE1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BEF7E6E85DB5CDE5D7A18F4F2EB8494B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C052BEBFBD0AB5218CC64BA3450F6547</key>
 		<dict>
 			<key>primary</key>
@@ -172,12 +222,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>D9FE98489C8338EBE25C475354722CB7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E396A93E4C79B22B7816E9F02F62ECED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>E6201897E03F1CF81B18D371B6BEA2CB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E776C1A26EFDBBA9BB2E3F3B4068EF1A</key>
+		<key>F5C2A4CE180AF32D48D53AA91D6DC246</key>
 		<dict>
 			<key>primary</key>
 			<true/>

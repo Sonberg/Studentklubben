@@ -1,4 +1,11 @@
 PODS:
+  - AnimatedSegmentSwitch (0.1.0)
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
   - BTNavigationDropdownMenu (0.4.1)
   - ChameleonFramework/Default (2.1.0)
   - ChameleonFramework/Swift (2.1.0):
@@ -7,6 +14,12 @@ PODS:
   - DGRunkeeperSwitch (1.1.4)
   - DynamicButton (3.1.0)
   - EZSwiftExtensions (1.7)
+  - FBSDKCoreKit (4.17.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.17.0):
+    - FBSDKCoreKit
+  - FBSDKShareKit (4.17.0):
+    - FBSDKCoreKit
   - Firebase/Auth (3.9.0):
     - Firebase/Core
     - FirebaseAuth (= 3.0.6)
@@ -38,6 +51,11 @@ PODS:
   - FirebaseStorage (1.0.4):
     - FirebaseAnalytics (~> 3.4)
     - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseUI/Auth (1.0.0):
+    - Firebase/Auth
+  - FirebaseUI/Facebook (1.0.0):
+    - FBSDKLoginKit (~> 4.0)
+    - FirebaseUI/Auth
   - FontAwesome.swift (1.0.0)
   - GoogleInterchangeUtilities (1.2.2):
     - GoogleSymbolUtilities (~> 1.1)
@@ -55,25 +73,30 @@ PODS:
   - GTMSessionFetcher/Core (1.1.7)
   - HanekeSwift (0.10.1)
   - LatoFont (2.0.1)
+  - Navigation-stack (1.0.0)
   - Nuke (4.1.2)
   - Spring (1.0.3)
   - SPXRevealableView (0.2)
   - SwiftyButton (0.6.0)
 
 DEPENDENCIES:
+  - AnimatedSegmentSwitch
   - BTNavigationDropdownMenu (from `https://github.com/PhamBaTho/BTNavigationDropdownMenu.git`, branch `swift-3.0`)
   - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
   - DateTools (from `https://github.com/MatthewYork/DateTools`, branch `swift`)
   - DGRunkeeperSwitch (~> 1.1.4)
   - DynamicButton (~> 3.1.0)
   - EZSwiftExtensions
+  - FBSDKShareKit
   - Firebase/Auth
   - Firebase/Core
   - Firebase/Database
   - Firebase/Storage
+  - FirebaseUI/Facebook
   - FontAwesome.swift
   - HanekeSwift (from `git@github.com:Haneke/HanekeSwift.git`, branch `feature/swift-3`)
   - LatoFont
+  - Navigation-stack (~> 1.0.0)
   - Nuke
   - Spring (from `https://github.com/MengTo/Spring.git`, branch `swift3`)
   - SPXRevealableView
@@ -113,12 +136,17 @@ CHECKOUT OPTIONS:
     :git: https://github.com/MengTo/Spring.git
 
 SPEC CHECKSUMS:
+  AnimatedSegmentSwitch: 7bc126b7b433f4a1b4fb6546abe405cd4b5163ae
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   BTNavigationDropdownMenu: 093f3cbfad1572f2c222bdf8d17584d1e13380d4
   ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
   DateTools: 9a92563d4567296fb6fa8ae586321159c514c8c6
   DGRunkeeperSwitch: cc237936f42237307f5e212e18136a27bf907bf1
   DynamicButton: 37968af761a31274aeac427f40204688fa810342
   EZSwiftExtensions: 4afef248066a036903d8496bf07bc355b22ce766
+  FBSDKCoreKit: 30a21d2d7b92984b3d80497113433c00824c35e9
+  FBSDKLoginKit: 42b7129ac0373ca99eaf4cbebf4d07bd42371f59
+  FBSDKShareKit: 9b573d03fbee36cbaf42d5bb1f2bc019e0d72347
   Firebase: ff77ffb77b317c3720fef57a60e9335cebf962e6
   FirebaseAnalytics: 6e58fc9b397664369ac7617fb0ba93fab6ba7b5b
   FirebaseAuth: 96e9674ff31d6e1f826d53e26aa003a57cab0295
@@ -126,6 +154,7 @@ SPEC CHECKSUMS:
   FirebaseDatabase: 3ebb2edb6007c3f0f87b248f3fa212bde56a1468
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   FirebaseStorage: c50aa353bf484072704e73b4aff1bd47adb735c4
+  FirebaseUI: 82bd64fc3fc5a9451c37a720aee813990e727cf1
   FontAwesome.swift: 2d32a3d62195343c2004b7c9043294ed2948553a
   GoogleInterchangeUtilities: d5bc4d88d5b661ab72f9d70c58d02ca8c27ad1f7
   GoogleSymbolUtilities: 631ee17048aa5e9ab133470d768ea997a5ef9b96
@@ -133,11 +162,12 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: a1f8ed39e4fe21c68957daed472c7afbcdf29166
   HanekeSwift: 4113367892828e7700d24a384027de6ebc79aad1
   LatoFont: 6ee909ba4326bfa3687d1b80ed743ddb91dabf50
+  Navigation-stack: 85ac0a7bd4002e7888c528d8817f10ffe2c225da
   Nuke: 7cfd2acdf90c36f66e6ea40795bac0d851a9afe0
   Spring: 3f02b5dc3308572ef177b3cad0fa7bbc4b0706f7
   SPXRevealableView: ae690be7e9fa43d074e37e23d5a6321e01651f4c
   SwiftyButton: 4c9b61c499f172971a1b8c2eebbbdc20a26d8a08
 
-PODFILE CHECKSUM: eeed800783684078e4346cf7bfc006c9dc4ef126
+PODFILE CHECKSUM: c403ba03971fc87b9e28d8f7d8ab6a1753ca31eb
 
 COCOAPODS: 1.1.1

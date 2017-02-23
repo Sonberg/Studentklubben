@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import Navigation_stack
 import ChameleonFramework
 
-class NavigationViewController: UINavigationController {
+class NavigationViewController: NavigationStack {
 
     override func viewDidLoad() {
         super.viewDidLoad()

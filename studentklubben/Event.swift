@@ -9,6 +9,7 @@
 import Nuke
 import UIKit
 import Firebase
+import ChameleonFramework
 
 class Event: UIModel {
     override init() {
@@ -54,12 +55,18 @@ class Event: UIModel {
         
         if data["url"] != nil  {
             self.url = data["url"] as! String
+
         }
         
     }
     
     var url : String = "";
-    var image : UIImage = #imageLiteral(resourceName: "4465127-party-wallpapers")
+    var image : UIImage = #imageLiteral(resourceName: "4465127-party-wallpapers") {
+        didSet {
+            self.averageColor = UIColor(averageColorFrom: self.image).darken(byPercentage: 0.4)!
+            self.color = UIColor(contrastingBlackOrWhiteColorOn: self.averageColor, isFlat: false)
+        }
+    }
     var name : String = ""
     var desc : String = ""
     var date : NSDate = NSDate()
@@ -67,6 +74,9 @@ class Event: UIModel {
     var location : String = ""
     var going : [String] = []
     var messages : [Message] = []
+    
+    var averageColor : UIColor = .white
+    var color : UIColor = .white
     
     
     

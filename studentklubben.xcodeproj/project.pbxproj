@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		891EECDC1E5F3E38004CB6EC /* NavigationStackExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891EECDB1E5F3E38004CB6EC /* NavigationStackExtension.swift */; };
+		891EECDE1E5F4B93004CB6EC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891EECDD1E5F4B93004CB6EC /* User.swift */; };
+		891EECE21E5F5537004CB6EC /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 891EECE11E5F5537004CB6EC /* Auth.storyboard */; };
+		891EECE41E5F55E2004CB6EC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 891EECE31E5F55E2004CB6EC /* LoginViewController.swift */; };
 		8926FC461E3E161E0095BE2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8926FC451E3E161E0095BE2B /* AppDelegate.swift */; };
 		8926FC4E1E3E161E0095BE2B /* studentklubben.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8926FC4C1E3E161E0095BE2B /* studentklubben.xcdatamodeld */; };
 		8926FC501E3E161E0095BE2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8926FC4F1E3E161E0095BE2B /* Assets.xcassets */; };
@@ -21,6 +25,8 @@
 		89361F0C1E5C2B6D00FBF5F3 /* VisitorsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89361F0B1E5C2B6C00FBF5F3 /* VisitorsTableViewCell.swift */; };
 		894AD2041E4A1EC1003BF339 /* MessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894AD2031E4A1EC1003BF339 /* MessageTableViewCell.swift */; };
 		894AD2071E4A1F6F003BF339 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 894AD2061E4A1F6F003BF339 /* Message.swift */; };
+		895C45101E5DEE12009EE039 /* TicketTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895C450F1E5DEE11009EE039 /* TicketTableViewCell.swift */; };
+		895C45121E5DFAD9009EE039 /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895C45111E5DFAD9009EE039 /* MapTableViewCell.swift */; };
 		895D59CA1E48D5030062190D /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D59C91E48D5030062190D /* Global.swift */; };
 		895D59CC1E4903860062190D /* RoundedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 895D59CB1E4903850062190D /* RoundedTableViewCell.swift */; };
 		896D74F21E3F942D0021BBA8 /* EventViewControllerExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 896D74F11E3F942D0021BBA8 /* EventViewControllerExtention.swift */; };
@@ -56,6 +62,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		891EECDB1E5F3E38004CB6EC /* NavigationStackExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationStackExtension.swift; sourceTree = "<group>"; };
+		891EECDD1E5F4B93004CB6EC /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		891EECE11E5F5537004CB6EC /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Auth.storyboard; sourceTree = "<group>"; };
+		891EECE31E5F55E2004CB6EC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8926FC421E3E161E0095BE2B /* studentklubben.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = studentklubben.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8926FC451E3E161E0095BE2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8926FC4D1E3E161E0095BE2B /* studentklubben.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = studentklubben.xcdatamodel; sourceTree = "<group>"; };
@@ -72,6 +82,8 @@
 		89361F0B1E5C2B6C00FBF5F3 /* VisitorsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitorsTableViewCell.swift; sourceTree = "<group>"; };
 		894AD2031E4A1EC1003BF339 /* MessageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTableViewCell.swift; sourceTree = "<group>"; };
 		894AD2061E4A1F6F003BF339 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		895C450F1E5DEE11009EE039 /* TicketTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TicketTableViewCell.swift; sourceTree = "<group>"; };
+		895C45111E5DFAD9009EE039 /* MapTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
 		895D59C91E48D5030062190D /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		895D59CB1E4903850062190D /* RoundedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundedTableViewCell.swift; sourceTree = "<group>"; };
 		896D74F11E3F942D0021BBA8 /* EventViewControllerExtention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewControllerExtention.swift; sourceTree = "<group>"; };
@@ -121,6 +133,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		891EECDF1E5F537B004CB6EC /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				8926FC511E3E161E0095BE2B /* LaunchScreen.storyboard */,
+				891EECE11E5F5537004CB6EC /* Auth.storyboard */,
+				8926FC5D1E3E165A0095BE2B /* Main.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		891EECE01E5F538C004CB6EC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				8926FC5C1E3E165A0095BE2B /* ViewController.swift */,
+				891EECDB1E5F3E38004CB6EC /* NavigationStackExtension.swift */,
+				89B887BD1E5C99A1009DEEA3 /* UserViewController.swift */,
+				8926FC621E3E19120095BE2B /* EventViewController.swift */,
+				89B66DD41E52FA97006830E2 /* EventTableView.swift */,
+				89BB18991E588587006185F7 /* EventChatExtension.swift */,
+				896D74F11E3F942D0021BBA8 /* EventViewControllerExtention.swift */,
+				896D74F31E3F99350021BBA8 /* NavigationViewController.swift */,
+				891EECE31E5F55E2004CB6EC /* LoginViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		8926FC391E3E161E0095BE2B = {
 			isa = PBXGroup;
 			children = (
@@ -148,21 +186,14 @@
 				8926FC451E3E161E0095BE2B /* AppDelegate.swift */,
 				89BB189B1E5894A8006185F7 /* TimeAgo.swift */,
 				8926FC4F1E3E161E0095BE2B /* Assets.xcassets */,
-				8926FC511E3E161E0095BE2B /* LaunchScreen.storyboard */,
+				891EECDF1E5F537B004CB6EC /* Storyboards */,
 				8926FC541E3E161E0095BE2B /* Info.plist */,
 				89BB18971E58831E006185F7 /* GoogleService-Info.plist */,
 				8926FC4C1E3E161E0095BE2B /* studentklubben.xcdatamodeld */,
 				896D74FB1E3FDF650021BBA8 /* Transition */,
 				89758A9D1E4B992600897BF9 /* Cells */,
-				8926FC5C1E3E165A0095BE2B /* ViewController.swift */,
-				8926FC5D1E3E165A0095BE2B /* Main.storyboard */,
-				89B887BD1E5C99A1009DEEA3 /* UserViewController.swift */,
-				8926FC621E3E19120095BE2B /* EventViewController.swift */,
-				89B66DD41E52FA97006830E2 /* EventTableView.swift */,
-				89BB18991E588587006185F7 /* EventChatExtension.swift */,
-				896D74F11E3F942D0021BBA8 /* EventViewControllerExtention.swift */,
-				896D74F31E3F99350021BBA8 /* NavigationViewController.swift */,
-				894AD2051E4A1F5D003BF339 /* Model */,
+				891EECE01E5F538C004CB6EC /* Controllers */,
+				894AD2051E4A1F5D003BF339 /* Models */,
 				895D59C91E48D5030062190D /* Global.swift */,
 				89338DB11E5A048000D2A873 /* UserView */,
 			);
@@ -178,14 +209,15 @@
 			name = UserView;
 			sourceTree = "<group>";
 		};
-		894AD2051E4A1F5D003BF339 /* Model */ = {
+		894AD2051E4A1F5D003BF339 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				896D74F71E3F9BA20021BBA8 /* Event.swift */,
 				894AD2061E4A1F6F003BF339 /* Message.swift */,
 				896D74F51E3F9B5F0021BBA8 /* UIModel.swift */,
+				891EECDD1E5F4B93004CB6EC /* User.swift */,
 			);
-			name = Model;
+			name = Models;
 			sourceTree = "<group>";
 		};
 		896D74FB1E3FDF650021BBA8 /* Transition */ = {
@@ -206,6 +238,8 @@
 				89F8A45A1E5087230066F2AF /* DescTableViewCell.swift */,
 				89BB189D1E59AA8A006185F7 /* ScreenshotTableViewCell.swift */,
 				89361F0B1E5C2B6C00FBF5F3 /* VisitorsTableViewCell.swift */,
+				895C450F1E5DEE11009EE039 /* TicketTableViewCell.swift */,
+				895C45111E5DFAD9009EE039 /* MapTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -332,6 +366,7 @@
 				89BB18981E58831E006185F7 /* GoogleService-Info.plist in Resources */,
 				89B887B31E5C8E55009DEEA3 /* Emoji.ttf in Resources */,
 				89B887BA1E5C8E55009DEEA3 /* Stateface.ttf in Resources */,
+				891EECE21E5F5537004CB6EC /* Auth.storyboard in Resources */,
 				89B887B81E5C8E55009DEEA3 /* MaterialIcons.ttf in Resources */,
 				89B887B91E5C8E55009DEEA3 /* OpenIconic.ttf in Resources */,
 				8926FC611E3E165A0095BE2B /* Main.storyboard in Resources */,
@@ -407,6 +442,7 @@
 				896D74F21E3F942D0021BBA8 /* EventViewControllerExtention.swift in Sources */,
 				8926FC601E3E165A0095BE2B /* ViewController.swift in Sources */,
 				89F8A45B1E5087230066F2AF /* DescTableViewCell.swift in Sources */,
+				895C45121E5DFAD9009EE039 /* MapTableViewCell.swift in Sources */,
 				89CE87301E52E52F004658CB /* TimestampView.swift in Sources */,
 				89CE872E1E52E504004658CB /* TableViewCell.swift in Sources */,
 				896D74F61E3F9B5F0021BBA8 /* UIModel.swift in Sources */,
@@ -428,8 +464,12 @@
 				894AD2071E4A1F6F003BF339 /* Message.swift in Sources */,
 				89B887BB1E5C8E55009DEEA3 /* SwiftIcons.swift in Sources */,
 				89338DB01E5A047A00D2A873 /* UserView.swift in Sources */,
+				891EECDC1E5F3E38004CB6EC /* NavigationStackExtension.swift in Sources */,
+				895C45101E5DEE12009EE039 /* TicketTableViewCell.swift in Sources */,
+				891EECE41E5F55E2004CB6EC /* LoginViewController.swift in Sources */,
 				895D59CC1E4903860062190D /* RoundedTableViewCell.swift in Sources */,
 				8926FC631E3E19120095BE2B /* EventViewController.swift in Sources */,
+				891EECDE1E5F4B93004CB6EC /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -549,7 +589,7 @@
 				CODE_SIGN_ENTITLEMENTS = studentklubben/studentklubben.entitlements;
 				DEVELOPMENT_TEAM = 83YLUPW875;
 				INFOPLIST_FILE = studentklubben/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.personberg.studentklubben;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -567,7 +607,7 @@
 				CODE_SIGN_ENTITLEMENTS = studentklubben/studentklubben.entitlements;
 				DEVELOPMENT_TEAM = 83YLUPW875;
 				INFOPLIST_FILE = studentklubben/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.personberg.studentklubben;
 				PRODUCT_NAME = "$(TARGET_NAME)";

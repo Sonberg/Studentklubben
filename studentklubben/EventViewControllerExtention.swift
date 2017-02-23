@@ -36,6 +36,7 @@ extension EventViewController {
         return runkeeperSwitch
     }
     
+    
     func updateChatfield()  {
         UIView.animate(withDuration: 0.3, animations: {
             if self.searchView != nil {
@@ -51,7 +52,7 @@ extension EventViewController {
         
         if let timeStampView = tableView.dequeueReusableRevealableViewWithIdentifier("timeStamp") as? TimestampView {
             timeStampView.date = NSDate.init()
-            timeStampView.color = color
+            timeStampView.color = self.event.color
             timeStampView.width = 55
             cell.setRevealableView(timeStampView, style: message.type == .other ? .over : .slide)
         }
@@ -101,12 +102,13 @@ extension EventViewController
                 UIView.animate(withDuration: 0.3, animations: {
                     self.backButton.alpha = 0
                     self.switchView.alpha = 0
+                    self.goingButton.alpha = 0
                 })
             } else {
                 UIView.animate(withDuration: 0.3, animations: {
                     self.backButton.alpha = 1
                     self.switchView.alpha = 1
-                    
+                    self.goingButton.alpha = 1
                 })
             }
         }

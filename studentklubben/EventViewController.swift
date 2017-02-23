@@ -23,7 +23,7 @@ enum navigationState : Int {
 }
 
 
-class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate {
+class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDataSource, UITableViewDelegate, visitorDelegate {
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -97,13 +97,13 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
         
         UIView.animate(withDuration: 0.3, animations: { 
             if self.userGoing(user: "me") {
-                button.frame.size.width = 30
+                button.frame.size.width = 40
                 button.color = .flatGreen
                 button.highlightedColor = .flatGreenDark
                 button.setTitle("", for: .normal)
                 button.setImage(UIImage.fontAwesomeIcon(name: .check, textColor: .white, size: CGSize(width: 16, height: 16)), for: .normal)
             } else {
-                button.frame.size.width = 30
+                button.frame.size.width = 40
                 button.setTitle("", for: .normal)
                 button.setImage(UIImage.fontAwesomeIcon(name: .check, textColor: .white, size: CGSize(width: 16, height: 16)), for: .normal)
                 button.color = .flatGray
@@ -123,8 +123,6 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
     }
 
     // MARK : - Variable
-    var averageColor : UIColor = .white
-    var color : UIColor = .white
     let screen = UIScreen.main.bounds
     var navigationBarSnapshot: UIView!
     var navigationBarHeight: CGFloat = 0
@@ -189,16 +187,14 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
                 
                 tableView.layer.removeAllAnimations()
                 tableView.setContentOffset(lastScrollOffset, animated: false)
-
+                tableView.reloadData()
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.averageColor = UIColor(averageColorFrom: self.event.image).darken(byPercentage: 0.4)!
-        self.color = UIColor(contrastingBlackOrWhiteColorOn: self.averageColor, isFlat: false)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorInset = .zero
@@ -207,10 +203,10 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.setNeedsLayout()
         tableView.layoutIfNeeded()
-        tableView.backgroundColor = averageColor
+        tableView.backgroundColor = event.averageColor
         setupHeaderView()
         self.navigationItem.title = self.event.name
-        self.setTableViewBackgroundGradient(topColor: .clear, bottomColor: self.averageColor)
+        self.setTableViewBackgroundGradient(topColor: .clear, bottomColor: self.event.averageColor)
         
         tableView.registerNib(UINib(nibName: "TimestampView", bundle: nil), forRevealableViewReuseIdentifier: "timeStamp")
         tableView.registerNib(UINib(nibName: "TimestampView", bundle: nil), forRevealableViewReuseIdentifier: "name")
@@ -222,14 +218,31 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
         // MARK : - Back button
         backButton = DynamicButton(style: DynamicButtonStyle.arrowLeft)
         backButton.strokeColor = .white
-        backButton.frame = CGRect(x: 16, y: 32, width: 18, height: 18)
+        backButton.frame = CGRect(x: 16, y: 40, width: 18, height: 18)
         backButton.addTarget(self, action: #selector(close), for: .touchUpInside)
         self.view.addSubview(backButton)
         
-        // Switch
-        switchView = navigationSwitch(color, state: self.currentState)
-        switchView.frame = CGRect(x: (Int(screen.size.width)/2 - Int(switchView.bounds.size.width)/2), y: 28, width:  Int(switchView.bounds.size.width), height: Int(switchView.bounds.size.height))
+        // MARK : - Switch
+        switchView = navigationSwitch(self.event.color, state: self.currentState)
+        switchView.frame = CGRect(x: (Int(screen.size.width)/2 - Int(switchView.bounds.size.width)/2), y: 36, width:  Int(switchView.bounds.size.width), height: Int(switchView.bounds.size.height))
         self.view.addSubview(switchView)
+        
+        // MARK : - Going
+        self.goingButton = FlatButton(frame: CGRect(x: Int(self.screen.size.width) - 40 - 16, y: 36 , width: 40, height: 40))
+        if self.userGoing(user: "me") {
+            self.goingButton.color = .flatGreen
+            self.goingButton.highlightedColor = .flatGreenDark
+        } else {
+            self.goingButton.color = .flatGray
+            self.goingButton.highlightedColor = .flatGrayDark
+        }
+        self.goingButton.cornerRadius  = self.goingButton.bounds.size.height/2
+        self.goingButton.frame.size.width = 40
+        self.goingButton.setTitle("", for: .normal)
+        self.goingButton.setImage(UIImage.fontAwesomeIcon(name: .check, textColor: .white, size: CGSize(width: 16, height: 16)), for: .normal)
+        self.goingButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
+        self.goingButton.addTarget(self, action: #selector(EventViewController.didTouchGoing(_:)), for: .touchUpInside)
+        self.view.addSubview(self.goingButton)
         
     }
     
@@ -366,40 +379,6 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-
-            
-            // MARK : - Confirm
-            /*
-            cell.textLabel?.text = ""
-            self.goingButton = FlatButton(frame: CGRect(x: 12, y: 8, width: 160, height: 30))
-            if self.userGoing(user: "me") {
-                self.goingButton.color = .flatGreen
-                self.goingButton.highlightedColor = .flatGreenDark
-            } else {
-                self.goingButton.color = .flatGray
-                self.goingButton.highlightedColor = .flatGrayDark
-            }
-            self.goingButton.cornerRadius  = self.goingButton.bounds.size.height/2
-            self.goingButton.frame.size.width = 30
-            self.goingButton.setTitle("", for: .normal)
-            self.goingButton.setImage(UIImage.fontAwesomeIcon(name: .check, textColor: .white, size: CGSize(width: 16, height: 16)), for: .normal)
-            self.goingButton.titleLabel?.font = UIFont.systemFont(ofSize: 13)
-            self.goingButton.addTarget(self, action: #selector(EventViewController.didTouchGoing(_:)), for: .touchUpInside)
-            
-            if !cell.contentView.subviews.contains(where: { (view : UIView) -> Bool in
-                if view is FlatButton {
-                    return true
-                }
-                
-                return false
-            }) {
-                cell.contentView.addSubview(self.goingButton)
-            }
-             */
-            
-           // cell.corners = [.topLeft, .topRight]
-           // cell.accessoryView = navigationSwitch(.darkGray, state: currentState)
-        
         
         if self.currentState == .info {
             
@@ -411,7 +390,7 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
                 cell.textLabel?.numberOfLines = 0
                 cell.textLabel?.text = self.event.name
                 cell.textLabel?.font = UIFont(name: "Futura-Bold", size: 26.0)
-                cell.textLabel?.textColor = color
+                cell.textLabel?.textColor = event.color
                 cell.textLabel?.sizeToFit()
                 //cell.textLabel?.adjustsFontSizeToFitWidth = true
                 cell.layoutIfNeeded()
@@ -421,7 +400,7 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
                 let cell = tableView.dequeueReusableCell(withIdentifier: "row", for: indexPath)
                 cell.backgroundColor = .clear
                 cell.textLabel?.font = UIFont.lato(size: 16)
-                cell.textLabel?.textColor = color
+                cell.textLabel?.textColor = event.color
                 cell.detailTextLabel?.textColor = .clear
                 cell.selectionStyle = .none
                 cell.accessoryView = nil
@@ -429,60 +408,58 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
                 
                 // MARK : - Date
                 if indexPath.row == 1 {
-                    cell.imageView?.image = UIImage.init(icon: FontType.linearIcons(LinearIconType.clock), size: CGSize(width: 18, height: 18), textColor: color, backgroundColor: .clear)
+                    cell.imageView?.image = UIImage.init(icon: FontType.linearIcons(LinearIconType.clock), size: CGSize(width: 18, height: 18), textColor: event.color, backgroundColor: .clear)
                     cell.textLabel?.text = self.event.date.timeAgoSinceNow()
                 }
                 
                 
                 // MARK : - Location
                 if indexPath.row == 2 {
-                    cell.imageView?.image = UIImage.init(icon: FontType.linearIcons(LinearIconType.mapMarker), size: CGSize(width: 18, height: 18), textColor: color, backgroundColor: .clear)
+                    cell.imageView?.image = UIImage.init(icon: FontType.linearIcons(LinearIconType.mapMarker), size: CGSize(width: 18, height: 18), textColor: event.color, backgroundColor: .clear)
                     cell.textLabel?.text = self.event.location
                 }
-                /*
-                // MARK : - Guest
-                if indexPath.row == 3 {
-                    cell.imageView?.image = UIImage.init(icon: FontType.linearIcons(LinearIconType.heart), size: CGSize(width: 18, height: 18), textColor: color, backgroundColor: .clear)
-                    cell.textLabel?.text = self.event.guest
-                }
-                
-                // MARK : - VIP
-                
-                if indexPath.row == 4 {
-                    cell.textLabel?.text = "VIP-Bord"
-                    cell.accessoryView = UIImageView(image: UIImage.init(icon: FontType.linearIcons(LinearIconType.chevronRight), size: CGSize(width: 18, height: 18), textColor: color, backgroundColor: .clear))
-                    cell.imageView?.image = UIImage.fontAwesomeIcon(name: .users, textColor: color, size: CGSize(width: 18, height: 18))
-                    cell.layer.roundCorners(.allCorners, radius: 0)
-                    return cell
-                }
-    */
                 return cell
             }
             
+            
+            // MARK : - Visitors
             if indexPath.row == 3 {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "visitors", for: indexPath) as! VisitorsTableViewCell
-                cell.imageView?.image = UIImage.init(icon: FontType.linearIcons(LinearIconType.checkmarkCircle), size: CGSize(width: 18, height: 18), textColor: color, backgroundColor: .clear)
+                cell.imageView?.image = UIImage.init(icon: FontType.linearIcons(LinearIconType.checkmarkCircle), size: CGSize(width: 18, height: 18), textColor: event.color, backgroundColor: .clear)
                 cell.update()
+                cell.delegate = self
                 cell.backgroundColor = .clear
                 return cell
             }
+        
             
-            
-            
+            // MARK : - Ticket
             if indexPath.row == 4 {
-                let descCell = tableView.dequeueReusableCell(withIdentifier: "desc", for: indexPath) as! DescTableViewCell
-                descCell.detailTextLabel?.numberOfLines = 0
-                descCell.backgroundColor = .clear
-                descCell.descLabel.textAlignment = .left
-                descCell.descLabel.numberOfLines = 0
-                descCell.descLabel.textColor = color
-                descCell.descLabel.topInset = 0
-                descCell.descLabel.font = UIFont.latoLight(size: 14)
-                descCell.descLabel.text = ""//self.event.desc
-                
-                descCell.detailTextLabel?.sizeToFit()
-                return descCell
+                let cell = tableView.dequeueReusableCell(withIdentifier: "ticket", for: indexPath) as! TicketTableViewCell
+                cell.event = self.event
+                cell.backgroundColor = .clear
+                cell.imageView?.image = UIImage.init(icon: FontType.linearIcons(LinearIconType.bookmark), size: CGSize(width: 18, height: 18), textColor: event.color, backgroundColor: .clear)
+                return cell
             }
+
+            
+            
+            if indexPath.row == 5 {
+                let cell = tableView.dequeueReusableCell(withIdentifier: "desc", for: indexPath) as! DescTableViewCell
+                cell.imageView?.image =  UIImage.init(icon: FontType.linearIcons(LinearIconType.textAlignRight), size: CGSize(width: 18, height: 18), textColor: event.color, backgroundColor: .clear)
+                cell.detailTextLabel?.numberOfLines = 0
+                cell.backgroundColor = .clear
+                cell.descLabel.textAlignment = .left
+                cell.descLabel.font = UIFont.lato(size: 16)
+                cell.descLabel.numberOfLines = 0
+                cell.descLabel.textColor = self.event.color
+                cell.descLabel.topInset = 24
+                cell.descLabel.leftInset = 48
+                cell.descLabel.text = self.event.desc
+                cell.descLabel.sizeToFit()
+                return cell
+            }
+            
             
             
             
@@ -500,7 +477,7 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
             
             if self.event.messages[indexPath.row].type == .screenshot {
                 let cell = tableView.dequeueReusableCell(withIdentifier: "screenshot", for: indexPath) as! ScreenshotTableViewCell
-                cell.update(message: event.messages[indexPath.row], color: color)
+                cell.update(message: event.messages[indexPath.row], color: self.event.color)
                 cell.backgroundColor = .clear
                 return cell
             }
@@ -535,8 +512,12 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
                 return 34
             }
             
+            if indexPath.row == 4  {
+                return 0
+            }
+            
             if indexPath.row == 3 {
-                return 120
+                return 100
             }
         }
     
@@ -562,6 +543,11 @@ class EventViewController: UIViewController, UITextFieldDelegate, UITableViewDat
     
      func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
+    }
+    
+    // MARK : - Visitor Delegate
+    func didSelect(user: User) {
+        self.performSegue(withIdentifier: "userSegue", sender: self)
     }
 
 }
